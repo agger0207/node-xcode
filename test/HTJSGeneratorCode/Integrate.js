@@ -12,10 +12,10 @@ myProj.parse(function (err) {
 
     console.log(myProj);
 
-    myProj.addHeaderFile('Models/HTTestModel.h', {}, 'HTJSGeneratorCode');
+    myProj.addHeaderFile('HTJSGenerateCode/Models/HTTestModel.h', {}, 'HTJSGeneratorCode');
     // myProj.addSourceFile('Models/HTTestModel.m', {}, 'HTJSGeneratorCode');
-    myProj.addFile('Models/HTTestModel.m', 'HTJSGeneratorCode', {});
+    myProj.addFile('HTJSGenerateCode/Models/HTTestModel.m', 'HTJSGeneratorCode', {});
 
     fs.writeFileSync(projectPath, myProj.writeSync());
-    console.log('new project written');
+    console.log('new project written 111');
 });
