@@ -5,9 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
-		E6A45E0A1C216EFC00C94A3D /* HTTestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A45E091C216EFC00C94A3D /* HTTestRequest.m */; settings = {ASSET_TAGS = (); }; };
 		E6AFD0081C1E99040027F340 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD0071C1E99040027F340 /* main.m */; };
 		E6AFD00B1C1E99040027F340 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD00A1C1E99040027F340 /* AppDelegate.m */; };
 		E6AFD00E1C1E99040027F340 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD00D1C1E99040027F340 /* ViewController.m */; };
@@ -16,6 +14,7 @@
 		E6AFD0161C1E99040027F340 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6AFD0141C1E99040027F340 /* LaunchScreen.storyboard */; };
 		E6AFD0211C1E99040027F340 /* HTJSGeneratorCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD0201C1E99040027F340 /* HTJSGeneratorCodeTests.m */; };
 		E6AFD02C1C1E99040027F340 /* HTJSGeneratorCodeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */; };
+		F9C6B1201632445B82E564FB /* HTTestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E28D1363F064BF18224E5F6 /* HTTestRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +35,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E6A45E081C216EFC00C94A3D /* HTTestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTestRequest.h; sourceTree = "<group>"; };
-		E6A45E091C216EFC00C94A3D /* HTTestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTestRequest.m; sourceTree = "<group>"; };
 		E6AFD0031C1E99040027F340 /* HTJSGeneratorCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HTJSGeneratorCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AFD0071C1E99040027F340 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E6AFD0091C1E99040027F340 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -54,6 +51,7 @@
 		E6AFD0271C1E99040027F340 /* HTJSGeneratorCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTJSGeneratorCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTJSGeneratorCodeUITests.m; sourceTree = "<group>"; };
 		E6AFD02D1C1E99040027F340 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E28D1363F064BF18224E5F6 /* HTTestRequest.m */ = {isa = PBXFileReference; name = "HTTestRequest.m"; path = "HTTestRequest.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,15 +79,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E6A45E071C216EFC00C94A3D /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-				E6A45E081C216EFC00C94A3D /* HTTestRequest.h */,
-				E6A45E091C216EFC00C94A3D /* HTTestRequest.m */,
-			);
-			path = Requests;
-			sourceTree = "<group>";
-		};
 		E6AFCFFA1C1E99040027F340 = {
 			isa = PBXGroup;
 			children = (
@@ -113,7 +102,6 @@
 		E6AFD0051C1E99040027F340 /* HTJSGeneratorCode */ = {
 			isa = PBXGroup;
 			children = (
-				E6A45E071C216EFC00C94A3D /* Requests */,
 				E6AFD0091C1E99040027F340 /* AppDelegate.h */,
 				E6AFD00A1C1E99040027F340 /* AppDelegate.m */,
 				E6AFD00C1C1E99040027F340 /* ViewController.h */,
@@ -123,6 +111,7 @@
 				E6AFD0141C1E99040027F340 /* LaunchScreen.storyboard */,
 				E6AFD0171C1E99040027F340 /* Info.plist */,
 				E6AFD0061C1E99040027F340 /* Supporting Files */,
+				EEE6E954FA2844C488571661 /* Requests */,
 			);
 			path = HTJSGeneratorCode;
 			sourceTree = "<group>";
@@ -151,6 +140,62 @@
 				E6AFD02D1C1E99040027F340 /* Info.plist */,
 			);
 			path = HTJSGeneratorCodeUITests;
+			sourceTree = "<group>";
+		};
+		D6FE86AD32B148C78510A66C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D2B9484C85A74B9FAC92F266 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Requests;
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		4D13C78AD8774B5B88D9DFCC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C85BFA32F5A2493EAC5767D3 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Requests;
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		A82E2A56A83F4D1EBADA4ABF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3D980EDEA2F44BE69C10F7E7 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Requests;
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		EEE6E954FA2844C488571661 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Requests;
+			path = Requests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,7 +334,7 @@
 				E6AFD00E1C1E99040027F340 /* ViewController.m in Sources */,
 				E6AFD00B1C1E99040027F340 /* AppDelegate.m in Sources */,
 				E6AFD0081C1E99040027F340 /* main.m in Sources */,
-				E6A45E0A1C216EFC00C94A3D /* HTTestRequest.m in Sources */,
+				F9C6B1201632445B82E564FB /* HTTestRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
