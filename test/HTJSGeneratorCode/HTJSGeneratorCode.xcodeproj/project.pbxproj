@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6A45E0A1C216EFC00C94A3D /* HTTestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A45E091C216EFC00C94A3D /* HTTestRequest.m */; settings = {ASSET_TAGS = (); }; };
 		E6AFD0081C1E99040027F340 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD0071C1E99040027F340 /* main.m */; };
 		E6AFD00B1C1E99040027F340 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD00A1C1E99040027F340 /* AppDelegate.m */; };
 		E6AFD00E1C1E99040027F340 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD00D1C1E99040027F340 /* ViewController.m */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6A45E081C216EFC00C94A3D /* HTTestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTestRequest.h; sourceTree = "<group>"; };
+		E6A45E091C216EFC00C94A3D /* HTTestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTestRequest.m; sourceTree = "<group>"; };
 		E6AFD0031C1E99040027F340 /* HTJSGeneratorCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HTJSGeneratorCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AFD0071C1E99040027F340 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E6AFD0091C1E99040027F340 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -78,6 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E6A45E071C216EFC00C94A3D /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				E6A45E081C216EFC00C94A3D /* HTTestRequest.h */,
+				E6A45E091C216EFC00C94A3D /* HTTestRequest.m */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
 		E6AFCFFA1C1E99040027F340 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +113,7 @@
 		E6AFD0051C1E99040027F340 /* HTJSGeneratorCode */ = {
 			isa = PBXGroup;
 			children = (
+				E6A45E071C216EFC00C94A3D /* Requests */,
 				E6AFD0091C1E99040027F340 /* AppDelegate.h */,
 				E6AFD00A1C1E99040027F340 /* AppDelegate.m */,
 				E6AFD00C1C1E99040027F340 /* ViewController.h */,
@@ -276,6 +289,7 @@
 				E6AFD00E1C1E99040027F340 /* ViewController.m in Sources */,
 				E6AFD00B1C1E99040027F340 /* AppDelegate.m in Sources */,
 				E6AFD0081C1E99040027F340 /* main.m in Sources */,
+				E6A45E0A1C216EFC00C94A3D /* HTTestRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
