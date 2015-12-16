@@ -50,8 +50,8 @@
 		E6AFD0271C1E99040027F340 /* HTJSGeneratorCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTJSGeneratorCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTJSGeneratorCodeUITests.m; sourceTree = "<group>"; };
 		E6AFD02D1C1E99040027F340 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E32AA1231D444CF1814159C0 /* HTTestModel.h */ = {isa = PBXFileReference; name = "HTTestModel.h"; path = "Models/HTTestModel.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		409B8421F8134F9C851A9B61 /* HTTestModel.m */ = {isa = PBXFileReference; name = "HTTestModel.m"; path = "Models/HTTestModel.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		1453961F4FAD426DA79B6F20 /* HTTestModel.h */ = {isa = PBXFileReference; name = "HTTestModel.h"; path = "Models/HTTestModel.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		A73F23AED75A4719B46FEFF4 /* HTTestModel.m */ = {isa = PBXFileReference; name = "HTTestModel.m"; path = "Models/HTTestModel.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +111,8 @@
 				E6AFD0141C1E99040027F340 /* LaunchScreen.storyboard */,
 				E6AFD0171C1E99040027F340 /* Info.plist */,
 				E6AFD0061C1E99040027F340 /* Supporting Files */,
+				1453961F4FAD426DA79B6F20 /* HTTestModel.h */,
+				A73F23AED75A4719B46FEFF4 /* HTTestModel.m */,
 			);
 			path = HTJSGeneratorCode;
 			sourceTree = "<group>";

@@ -6,15 +6,13 @@ var project = require('../../lib/pbxProject.js'),
 
 // parsing is async, in a different process
 myProj.parse(function (err) {
-    // myProj.addHeaderFile('./HTJSGenerateCode/Models/HTTestModel.h');
-    // myProj.addHeaderFile('./HTJSGenerateCode/Models/HTTestModel.m');
-    // myProj.addFramework('FooKit.framework');
-
     console.log(myProj);
 
-    myProj.addHeaderFile('HTJSGenerateCode/Models/HTTestModel.h', {}, 'HTJSGeneratorCode');
-    // myProj.addSourceFile('Models/HTTestModel.m', {}, 'HTJSGeneratorCode');
-    myProj.addFile('HTJSGenerateCode/Models/HTTestModel.m', 'HTJSGeneratorCode', {});
+    myProj.removeFile('Models/HTTestModel.h', {}, 'HTJSGeneratorCode');
+    myProj.removeFile('Models/HTTestModel.m', 'HTJSGeneratorCode', {});
+
+    myProj.addHeaderFile('Models/HTTestModel.h', {}, 'HTJSGeneratorCode');
+    myProj.addFile('Models/HTTestModel.m', 'HTJSGeneratorCode', {});
 
     fs.writeFileSync(projectPath, myProj.writeSync());
     console.log('new project written 111');
