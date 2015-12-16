@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		E6AFD0081C1E99040027F340 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD0071C1E99040027F340 /* main.m */; };
 		E6AFD00B1C1E99040027F340 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD00A1C1E99040027F340 /* AppDelegate.m */; };
@@ -50,8 +51,6 @@
 		E6AFD0271C1E99040027F340 /* HTJSGeneratorCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTJSGeneratorCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTJSGeneratorCodeUITests.m; sourceTree = "<group>"; };
 		E6AFD02D1C1E99040027F340 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8F58DB50FAA24BF995719D3B /* HTTestModel.h */ = {isa = PBXFileReference; name = "HTTestModel.h"; path = "Models/HTTestModel.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		C83FE4AAFA2741E1858B7737 /* HTTestModel.m */ = {isa = PBXFileReference; name = "HTTestModel.m"; path = "Models/HTTestModel.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,22 +110,6 @@
 				E6AFD0141C1E99040027F340 /* LaunchScreen.storyboard */,
 				E6AFD0171C1E99040027F340 /* Info.plist */,
 				E6AFD0061C1E99040027F340 /* Supporting Files */,
-				1453961F4FAD426DA79B6F20 /* HTTestModel.h */,
-				A73F23AED75A4719B46FEFF4 /* HTTestModel.m */,
-				2313863C0BF046E4B09D3F2E /* HTTestModel.h */,
-				400C2FD0969644639352AD63 /* HTTestModel.m */,
-				20993387A7C04D7594F5A08B /* HTTestModel.h */,
-				25AA7898B0234358A9662D50 /* HTTestModel.m */,
-				A9A8B4D4E8944CECA9B733E4 /* HTTestModel.h */,
-				38DF9581FD7B442DA0E38674 /* HTTestModel.m */,
-				B0FFDE78C3364164A7B06EE3 /* HTTestModel.h */,
-				91FFD6FFE7784AB4A4001B15 /* HTTestModel.m */,
-				2767B62A6DC14F90852BD6EA /* HTTestModel.h */,
-				BEA4090703E04213AB9AC27F /* HTTestModel.m */,
-				DC1C44346BF54650B7D5ABC3 /* HTTestModel.h */,
-				B7977BBD2793496AB5271249 /* HTTestModel.m */,
-				8F58DB50FAA24BF995719D3B /* HTTestModel.h */,
-				C83FE4AAFA2741E1858B7737 /* HTTestModel.m */,
 			);
 			path = HTJSGeneratorCode;
 			sourceTree = "<group>";
