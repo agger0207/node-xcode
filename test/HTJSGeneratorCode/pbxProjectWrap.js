@@ -119,3 +119,26 @@ function GetExtensionFileName(pathfilename)
     var arrfn = fn.split(".");
     return arrfn[arrfn.length - 1];
 }
+
+
+// 根据完整路径获取到对应的Group.
+function findGroupByAbsolutePath() {
+    var fullPath = "HTJSGeneratorCode/Models";
+    var pathList = fullPath.split('/');
+    if (pathList.length == 0) {
+        return;
+    }
+
+    var root = pathList[0];
+    var groupKey =  myProj.findPBXGroupKey({ path: root});
+    pathList.splice(0, 1);
+    while (pathList.length > 0) {
+        root = pathList[0];
+        groupKey = myProj.findPBXGroupKeyInParentGroup({path: root}, groupKey);
+        pathList.splice(0, 1);
+    }
+
+    var group = myProj.getPBXGroupByKey(groupKey);
+
+    return groupKey;
+}
