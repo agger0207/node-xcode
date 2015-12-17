@@ -97,3 +97,25 @@ function removeFilesInGroup() {
         //console.log(length);
     }
 }
+
+// 遍历文件和目录
+function  loopFilesInFilePath(root) {
+    var res = [];
+    var files = fs.readdirSync(root);
+    files.forEach(function(file) {
+        var extensionFileName = GetExtensionFileName(file);
+        if ("m" == extensionFileName || "h" == extensionFileName) {
+            console.log(file);
+        }
+    });
+}
+
+function GetExtensionFileName(pathfilename)
+{
+    var reg = /(\\+)/g;
+    var pfn = pathfilename.replace(reg, "#");
+    var arrpfn = pfn.split("#");
+    var fn = arrpfn[arrpfn.length - 1];
+    var arrfn = fn.split(".");
+    return arrfn[arrfn.length - 1];
+}

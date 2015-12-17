@@ -100,20 +100,43 @@ function  testworkflow() {
 
 // 根据完整路径获取到对应的Group.
 function findGroupByAbsolutePath() {
-    var groupPath;
+    var groups = myProj
 }
+
+findGroupByAbsolutePath();
 
 // 遍历文件和目录
-function  loopFilesInFilePath() {
-
+function  loopFilesInFilePath(root) {
+    var res = [];
+    var files = fs.readdirSync(root);
+    files.forEach(function(file) {
+        var extensionFileName = GetExtensionFileName(file);
+        if ("m" == extensionFileName || "h" == extensionFileName) {
+            console.log(file);
+        }
+    });
 }
+
+function GetExtensionFileName(pathfilename)
+{
+    var reg = /(\\+)/g;
+    var pfn = pathfilename.replace(reg, "#");
+    var arrpfn = pfn.split("#");
+    var fn = arrpfn[arrpfn.length - 1];
+    var arrfn = fn.split(".");
+    return arrfn[arrfn.length - 1];
+}
+
+//loopFilesInFilePath("HTJSGeneratorCode/Models");
 
 // 添加文件夹到某个Group. 主要是依赖遍历文件和目录.
-function  addFolderToGroup() {
+//function  addFolderToGroup() {
+//
+//}
 
-}
 
 
+// removeFilesInGroup已经OK.
 // Done. 根据FileRef的UUID从Project的File Reference Section中删除.
 function removeFromPbxFileReferenceSectionWithKey (fileRef) {
     for (i in myProj.pbxFileReferenceSection()) {
@@ -201,6 +224,11 @@ function removeFilesInGroup() {
         //console.log(length);
     }
 }
+
+
+
+
+
 //
 //pbxProject.prototype.removeSourceFile = function (path, opt, group) {
 //    var file;
@@ -231,7 +259,7 @@ function removeFilesInGroup() {
 //testRemoveGroups();
 //testRemoveSubGroup();
 //testworkflow();
-removeFilesInGroup();
+//removeFilesInGroup();
 
 
 
