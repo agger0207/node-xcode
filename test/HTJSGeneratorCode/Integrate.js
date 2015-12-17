@@ -7,28 +7,53 @@ var project = require('../../lib/pbxProject.js'),
 // Debug with parseSync as it is impossible to debug async parsing.
 myProj.parseSync();
 
-//var requestGroupKey = myProj.findPBXGroupKey({path: 'HTJSGeneratorCode/Request'});
-// /var requestGroupKey = myProj.findPBXGroupKey({path: 'HTJSGeneratorCode/Requests'});
-// TODO: 如何找到绝对路径下的Group呢?
-var requestGroupKey = myProj.findPBXGroupKey({path: 'Requests'});
-if (requestGroupKey === undefined) {
-    var keyByName = myProj.findPBXGroupKey({ path: 'HTJSGeneratorCode'});
-    var requestGroupKey = myProj.pbxCreateGroup("Requests", "Requests");
-    myProj.addToPbxGroup(requestGroupKey, keyByName, {});
-    fs.writeFileSync(projectPath, myProj.writeSync());
-} else {
-    console.log("requestGroupKey is found successfullye: " + requestGroupKey);
-    var parentGroupKey = myProj.findPBXGroupKey({ path: 'HTJSGeneratorCode'});
+function  test1() {
+    //  var requestGroupKey = myProj.findPBXGroupKey({path: 'HTJSGeneratorCode/Request'});
+    //  var requestGroupKey = myProj.findPBXGroupKey({path: 'HTJSGeneratorCode/Requests'});
+    // TODO: 如何找到绝对路径下的Group呢?
+    var requestGroupKey = myProj.findPBXGroupKey({path: 'Requests'});
+    if (requestGroupKey === undefined) {
+        var keyByName = myProj.findPBXGroupKey({ path: 'HTJSGeneratorCode'});
+        var requestGroupKey = myProj.pbxCreateGroup("Requests", "Requests");
+        myProj.addToPbxGroup(requestGroupKey, keyByName, {});
+        fs.writeFileSync(projectPath, myProj.writeSync());
+    } else {
+        console.log("requestGroupKey is found successfullye: " + requestGroupKey);
+        var parentGroupKey = myProj.findPBXGroupKey({ path: 'HTJSGeneratorCode'});
 
-    // TODO:  这个老的方法只能删除文件,不能删除Group. 要自己重写.
-    // 看情况, 删除Group的时候,还需要自己删除所有的文件.
-    myProj.removeFromPbxGroup(requestGroupKey, parentGroupKey);
+        // TODO:  这个老的方法只能删除文件,不能删除Group. 要自己重写.
+        // 看情况, 删除Group的时候,还需要自己删除所有的文件.
+        myProj.removeFromPbxGroup(requestGroupKey, parentGroupKey);
 
-    // TODO: 同名的Group也会被删除. 而且只能按照名字来删除,不能按照Key来删除.
-    myProj.removePbxGroup('Requests');
+        // TODO: 同名的Group也会被删除. 而且只能按照名字来删除,不能按照Key来删除.
+        myProj.removePbxGroup('Requests');
 
-    fs.writeFileSync(projectPath, myProj.writeSync());
+        fs.writeFileSync(projectPath, myProj.writeSync());
+    }
 }
+
+function testRemoveSubGroup() {
+    var requestGroupKey = myProj.findPBXGroupKeyInParent({path: 'Requests'}, {path: 'HTJSGeneratorCode'});
+
+    if (requestGroupKey === undefined) {
+        // Add new group.
+        var keyByName = myProj.findPBXGroupKey({ path: 'HTJSGeneratorCode'});
+        var requestGroupKey = myProj.pbxCreateGroup("Requests", "Requests");
+        myProj.addToPbxGroup(requestGroupKey, keyByName, {});
+        fs.writeFileSync(projectPath, myProj.writeSync());
+    } else {
+        // Remove group.
+        console.log("requestGroupKey is found successfullye: " + requestGroupKey);
+        var parentGroupKey = myProj.findPBXGroupKey({ path: 'HTJSGeneratorCode'});
+
+        // TODO: 预期在这个方法中, 1 从Parent中删除该Group. 2 删除所有该Group下的文件 3 从Project中删除该Group.
+        myProj.removeGroupFromPbxGroup(requestGroupKey, parentGroupKey);
+
+        fs.writeFileSync(projectPath, myProj.writeSync());
+    }
+}
+
+testRemoveSubGroup();
 
 //
 //exports.findGroupKey = {
