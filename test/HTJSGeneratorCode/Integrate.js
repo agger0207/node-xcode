@@ -53,8 +53,52 @@ function testRemoveSubGroup() {
     }
 }
 
-testRemoveSubGroup();
+// 删除所有同名的Group.
+function  testRemoveGroups() {
+    //  删除 Group的时候不会删除Group下添加的文件,但是重新添加新文件的话工程会自动修正.
+    myProj.removePbxGroup("11");
+    fs.writeFileSync(projectPath, myProj.writeSync());
+}
 
+function  testworkflow() {
+    console.log("Start update Project " + projectPath + " !");
+
+    // Step 1: Find parent Group Key according to path. This group must be available in the project.
+    // Model files and request files will be added into this group.
+    // TODO: The path should be passed as a param.
+    var parentGroupKey = myProj.findPBXGroupKey({ path: 'HTJSGeneratorCode'});
+    console.log("parentGroupKey : " + parentGroupKey);
+
+    // Step 2: Create group if it doesn't exist.
+    // TODO: 1 Group name and path should be passed as params. 2 If the group already exists then it is uncessary to create and add them.
+    var modelGroupKey = myProj.findPBXGroupKeyInParentGroup({ path: 'Models'}, parentGroupKey);
+    if (undefined == modelGroupKey) {
+        // Step 2: 不存在则新建Group.
+        modelGroupKey = myProj.pbxCreateGroup("Models", "Models");
+
+        // Add new created groups into parent group.
+        // Step 3: 将Group加到parent Group中
+        myProj.addToPbxGroup(modelGroupKey, parentGroupKey, {});
+    } else {
+        // Step 3: 如果存在,那么删除文件.
+        // TODO: 1 File path may not work if group directory doesn't match. 2 Loop directories to find files automatically.
+        // TODO: 这里不可以直接用removeFile和addFile,一定要区分header和Source.
+        myProj.removeHeaderFile('HTTestModel.h', {}, modelGroupKey);
+        myProj.removeSourceFile('HTTestModel.m', {}, modelGroupKey);
+    }
+
+    myProj.addHeaderFile('HTTestModel.h', {}, modelGroupKey);
+    myProj.addSourceFile('HTTestModel.m', {}, modelGroupKey);
+
+
+    // Step 5: Write back to project.
+    fs.writeFileSync(projectPath, myProj.writeSync());
+    console.log('Project ' + projectPath + " is updated successfully !");
+}
+
+//testRemoveGroups();
+//testRemoveSubGroup();
+testworkflow();
 //
 //exports.findGroupKey = {
 //    'should return a valid group key':function(test) {
