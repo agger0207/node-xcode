@@ -1,6 +1,8 @@
 // API is a bit wonky right now
 var project = require('../../lib/pbxProject.js'),
     fs = require('fs'),
+    util = require('util'),
+    f = util.format,
     projectPath = 'HTJSGeneratorCode.xcodeproj/project.pbxproj',
     myProj = project(projectPath);
 
@@ -96,9 +98,119 @@ function  testworkflow() {
     console.log('Project ' + projectPath + " is updated successfully !");
 }
 
+// 根据完整路径获取到对应的Group.
+function findGroupByAbsolutePath() {
+    var groupPath;
+}
+
+// 遍历文件和目录
+function  loopFilesInFilePath() {
+
+}
+
+// 添加文件夹到某个Group. 主要是依赖遍历文件和目录.
+function  addFolderToGroup() {
+
+}
+
+
+// Done. 根据FileRef的UUID从Project的File Reference Section中删除.
+function removeFromPbxFileReferenceSectionWithKey (fileRef) {
+    for (i in myProj.pbxFileReferenceSection()) {
+        if (i == fileRef) {
+            delete myProj.pbxFileReferenceSection()[i];
+            break;
+        }
+    }
+    var commentKey = f("%s_comment", fileRef);
+    if (myProj.pbxFileReferenceSection()[commentKey] != undefined) {
+        delete myProj.pbxFileReferenceSection()[commentKey];
+    }
+}
+
+function removeFromPbxBuildFileSectionWithKey (fileRef) {
+    var uuid;
+
+    for (uuid in myProj.pbxBuildFileSection()) {
+        if (uuid == fileRef) {
+            delete myProj.pbxBuildFileSection()[uuid];
+        }
+    }
+    var commentKey = f("%s_comment", fileRef);
+    if (myProj.pbxBuildFileSection()[commentKey] != undefined) {
+        delete myProj.pbxBuildFileSection()[commentKey];
+        delete myProj.pbxBuildFileSection()[commentKey];
+    }
+}
+
+// Note: 这里只取了firstTarget, 理论上所有的Target都需要获取. 这里所有的参数都是fileRef的uuid.
+function removeFromPbxSourcesBuildPhaseWithKey (fileRef) {
+    var sources = myProj.pbxSourcesBuildPhaseObj(myProj.getFirstTarget()), i;
+    for (i in sources.files) {
+        if (i == fileRef) {
+            sources.files.splice(i, 1);
+            break;
+        }
+    }
+}
+
+function removeFilesInGroup() {
+    var groupKey = myProj.findPBXGroupKey({ path: 'Models'});
+    var group = myProj.getPBXGroupByKey(groupKey);
+    if (group) {
+        var groupChildren = group.children, i;
+        for (i in groupChildren) {
+            file = groupChildren[i];
+            var uuid = file.value;
+            if (uuid != undefined) {
+                removeFromPbxFileReferenceSectionWithKey(uuid);    // PBXFileReference
+            }
+
+            // 从当前Group中删除
+            groupChildren.splice(i, 1);
+            // TODO: 如果是子Group, 还要继续删除. 暂时不考虑文件夹.
+            //myProj.removeFromPbxGroup(file, group);            // PBXGroup
+
+            // 从Build File Ref中删除
+            removeFromPbxBuildFileSectionWithKey(uuid);
+
+            // 从Build Phase中删除
+            removeFromPbxSourcesBuildPhaseWithKey(uuid);
+        }
+    }
+}
+//
+//pbxProject.prototype.removeSourceFile = function (path, opt, group) {
+//    var file;
+//    if (group) {
+//        file = this.removeFile(path, group, opt);
+//    }
+//    else {
+//        file = this.removePluginFile(path, opt);
+//    }
+//    file.target = opt ? opt.target : undefined;
+//    this.removeFromPbxBuildFileSection(file);        // PBXBuildFile
+//    this.removeFromPbxSourcesBuildPhase(file);       // PBXSourcesBuildPhase
+//
+//    return file;
+//}
+//
+//pbxProject.prototype.removeFile = function (path, group, opt) {
+//    var file = new pbxFile(path, opt);
+//
+//    this.removeFromPbxFileReferenceSection(file);    // PBXFileReference
+//    this.removeFromPbxGroup(file, group);            // PBXGroup
+//
+//    return file;
+//}
+
+
+
 //testRemoveGroups();
 //testRemoveSubGroup();
-testworkflow();
+//testworkflow();
+removeFilesInGroup();
+
 //
 //exports.findGroupKey = {
 //    'should return a valid group key':function(test) {
