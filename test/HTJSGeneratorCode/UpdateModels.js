@@ -2,12 +2,174 @@
 var project = require('../../lib/pbxProject.js'),
     fs = require('fs'),
     util = require('util'),
-    f = util.format,
-    projectPath = 'HTJSGeneratorCode.xcodeproj/project.pbxproj',
-    myProj = project(projectPath);
+    f = util.format;
+
+// TODO：参数缺少时, 需要给予警告和提示. 参数的处理需要更灵活
+// node UpdateModels.js projectName groupParentPath folderParentPath
+var projectName = process.argv[2];
+var groupParentPath = process.argv[3];
+var folderParentPath = process.argv[4];
+var projectPath = projectName + '.xcodeproj/project.pbxproj';
+//var projectPath = 'HTJSGeneratorCode.xcodeproj/project.pbxproj';
+
+// Get Project.
+var myProj = project(projectPath);
 
 // Debug with parseSync as it is impossible to debug async parsing.
+// For release version, it is OK to use parse function.
 myProj.parseSync();
+
+function updateCode () {
+    if (undefined == projectName || undefined == groupParentPath || undefined == folderParentPath || undefined == myProj) {
+        return;
+    }
+
+    // 固定添加Models和Requests, 不需要参数配置
+    var autoGroupNames = ["Models", "Requests"];
+    // TODO: 循环这个数组.
+    var groupName = "Models";
+    var absoluteGroupPath = groupParentPath + "/" + groupName;
+    var groupKey = findGroupByAbsolutePath(absoluteGroupPath);
+    if (undefined == groupKey) {
+        // group不存在,需要创建
+    } else {
+        // group存在, 删除其中的所有文件.
+    }
+
+
+}
+
+// 根据完整路径获取到对应的Group.
+function findGroupByAbsolutePath(fullPath) {
+    var pathList = fullPath.split('/');
+    if (pathList.length == 0) {
+        return;
+    }
+
+    var root = pathList[0];
+    var groupKey =  myProj.findPBXGroupKey({ path: root});
+    pathList.splice(0, 1);
+    while (pathList.length > 0 && undefined != groupKey) {
+        root = pathList[0];
+        groupKey = myProj.findPBXGroupKeyInParentGroup({path: root}, groupKey);
+        pathList.splice(0, 1);
+    }
+
+    if (undefined != groupKey) {
+        console.log("Find group by absolute path  " + fullPath);
+        var group = myProj.getPBXGroupByKey(groupKey);
+    }
+
+    return groupKey;
+}
+
+
+// removeFilesInGroup已经OK.
+// Done. 根据FileRef的UUID从Project的File Reference Section中删除.
+function removeFromPbxFileReferenceSectionWithKey (fileRef) {
+    for (i in myProj.pbxFileReferenceSection()) {
+        if (i == fileRef) {
+            delete myProj.pbxFileReferenceSection()[i];
+            break;
+        }
+    }
+    var commentKey = f("%s_comment", fileRef);
+    if (myProj.pbxFileReferenceSection()[commentKey] != undefined) {
+        delete myProj.pbxFileReferenceSection()[commentKey];
+    }
+}
+
+// TODO: 这里必须返回BuildFileUUID. 否则的话,无法从BuildPhase中删除.
+function removeFromPbxBuildFileSectionWithKey (fileRef) {
+    var uuid;
+    var buildFileUUID;
+    for (uuid in myProj.pbxBuildFileSection()) {
+        var buildFile = myProj.pbxBuildFileSection()[uuid];
+        if (buildFile.fileRef == fileRef) {
+            delete buildFile;
+            buildFileUUID = uuid;
+            break;
+        }
+    }
+    var commentKey = f("%s_comment", fileRef);
+    var commentKey = f("%s_comment", fileRef);
+    if (myProj.pbxBuildFileSection()[commentKey] != undefined) {
+        delete myProj.pbxBuildFileSection()[commentKey];
+    }
+
+    return uuid;
+}
+
+// Note: 这里只取了firstTarget, 理论上所有的Target都需要获取. 这里所有的参数都是fileRef的uuid.
+// Note: File Reference里面的uuid和BuildPhase中的uuid不相同. 所以这个方法不正确.
+function removeFromPbxSourcesBuildPhaseWithKey (fileRef) {
+    // var target = myProj.getFirstTarget();
+    // TODO: 用FirstTarget会抛出异常,原因未知.
+    var target = undefined;
+    var sources = myProj.pbxSourcesBuildPhaseObj(target), i;
+    for (i in sources.files) {
+        if (sources.files[i].value == fileRef) {
+            sources.files.splice(i, 1);
+            break;
+        }
+    }
+}
+
+function removeFilesInGroup() {
+    var groupKey = myProj.findPBXGroupKey({ path: 'Models'});
+    var group = myProj.getPBXGroupByKey(groupKey);
+    if (group) {
+        var groupChildren = group.children, i;
+        for (i in groupChildren) {
+            file = groupChildren[i];
+            var uuid = file.value;
+            if (uuid != undefined) {
+                removeFromPbxFileReferenceSectionWithKey(uuid);    // PBXFileReference
+            }
+
+            // 从当前Group中删除. TODO: 这里删除了后不可以继续遍历了.
+            //groupChildren.splice(i, 1);
+            // TODO: 如果是子Group, 还要继续删除. 暂时不考虑文件夹.
+            //myProj.removeFromPbxGroup(file, group);            // PBXGroup
+
+            // 从Build File Ref中删除
+            var buildFileUUID = removeFromPbxBuildFileSectionWithKey(uuid);
+
+            // 从Build Phase中删除
+            if (undefined != buildFileUUID) {
+                removeFromPbxSourcesBuildPhaseWithKey(buildFileUUID);
+            }
+
+            console.log("finish one file");
+        }
+
+        // 删除groupChildren.
+        groupChildren.splice(0, groupChildren.length);
+
+        //var length = groupChildren.length;
+        //groupChildren = group.children;
+        //length = groupChildren.length;
+        //console.log(length);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function  test1() {
     //  var requestGroupKey = myProj.findPBXGroupKey({path: 'HTJSGeneratorCode/Request'});
@@ -109,7 +271,7 @@ function findGroupByAbsolutePath() {
     var root = pathList[0];
     var groupKey =  myProj.findPBXGroupKey({ path: root});
     pathList.splice(0, 1);
-    while (pathList.length > 0) {
+    while (pathList.length > 0 && undefined != groupKey) {
         root = pathList[0];
         groupKey = myProj.findPBXGroupKeyInParentGroup({path: root}, groupKey);
         pathList.splice(0, 1);
@@ -160,171 +322,9 @@ function  testArgv() {
 
 testArgv();
 
-// removeFilesInGroup已经OK.
-// Done. 根据FileRef的UUID从Project的File Reference Section中删除.
-function removeFromPbxFileReferenceSectionWithKey (fileRef) {
-    for (i in myProj.pbxFileReferenceSection()) {
-        if (i == fileRef) {
-            delete myProj.pbxFileReferenceSection()[i];
-            break;
-        }
-    }
-    var commentKey = f("%s_comment", fileRef);
-    if (myProj.pbxFileReferenceSection()[commentKey] != undefined) {
-        delete myProj.pbxFileReferenceSection()[commentKey];
-    }
-}
-
-// TODO: 这里必须返回BuildFileUUID. 否则的话,无法从BuildPhase中删除.
-function removeFromPbxBuildFileSectionWithKey (fileRef) {
-    var uuid;
-    var buildFileUUID;
-    for (uuid in myProj.pbxBuildFileSection()) {
-        var buildFile = myProj.pbxBuildFileSection()[uuid];
-        if (buildFile.fileRef == fileRef) {
-            delete buildFile;
-            buildFileUUID = uuid;
-            break;
-        }
-    }
-    var commentKey = f("%s_comment", fileRef);
-    var commentKey = f("%s_comment", fileRef);
-    if (myProj.pbxBuildFileSection()[commentKey] != undefined) {
-        delete myProj.pbxBuildFileSection()[commentKey];
-    }
-
-    return uuid;
-}
-
-// Note: 这里只取了firstTarget, 理论上所有的Target都需要获取. 这里所有的参数都是fileRef的uuid.
-// Note: File Reference里面的uuid和BuildPhase中的uuid不相同. 所以这个方法不正确.
-function removeFromPbxSourcesBuildPhaseWithKey (fileRef) {
-    // var target = myProj.getFirstTarget();
-    // TODO: 用FirstTarget会抛出异常,原因未知.
-    var target = undefined;
-    var sources = myProj.pbxSourcesBuildPhaseObj(target), i;
-    for (i in sources.files) {
-        if (sources.files[i].value == fileRef) {
-            sources.files.splice(i, 1);
-            break;
-        }
-    }
-}
-
-function removeFilesInGroup() {
-    var groupKey = myProj.findPBXGroupKey({ path: 'Models'});
-    var group = myProj.getPBXGroupByKey(groupKey);
-    if (group) {
-        var groupChildren = group.children, i;
-        for (i in groupChildren) {
-            file = groupChildren[i];
-            var uuid = file.value;
-            if (uuid != undefined) {
-                removeFromPbxFileReferenceSectionWithKey(uuid);    // PBXFileReference
-            }
-
-            // 从当前Group中删除. TODO: 这里删除了后不可以继续遍历了.
-            //groupChildren.splice(i, 1);
-            // TODO: 如果是子Group, 还要继续删除. 暂时不考虑文件夹.
-            //myProj.removeFromPbxGroup(file, group);            // PBXGroup
-
-            // 从Build File Ref中删除
-            var buildFileUUID = removeFromPbxBuildFileSectionWithKey(uuid);
-
-            // 从Build Phase中删除
-            if (undefined != buildFileUUID) {
-                removeFromPbxSourcesBuildPhaseWithKey(buildFileUUID);
-            }
-
-            console.log("finish one file");
-        }
-
-        // 删除groupChildren.
-        groupChildren.splice(0, groupChildren.length);
-
-        //var length = groupChildren.length;
-        //groupChildren = group.children;
-        //length = groupChildren.length;
-        //console.log(length);
-    }
-}
 
 
 
-
-
-//
-//pbxProject.prototype.removeSourceFile = function (path, opt, group) {
-//    var file;
-//    if (group) {
-//        file = this.removeFile(path, group, opt);
-//    }
-//    else {
-//        file = this.removePluginFile(path, opt);
-//    }
-//    file.target = opt ? opt.target : undefined;
-//    this.removeFromPbxBuildFileSection(file);        // PBXBuildFile
-//    this.removeFromPbxSourcesBuildPhase(file);       // PBXSourcesBuildPhase
-//
-//    return file;
-//}
-//
-//pbxProject.prototype.removeFile = function (path, group, opt) {
-//    var file = new pbxFile(path, opt);
-//
-//    this.removeFromPbxFileReferenceSection(file);    // PBXFileReference
-//    this.removeFromPbxGroup(file, group);            // PBXGroup
-//
-//    return file;
-//}
-
-
-
-//testRemoveGroups();
-//testRemoveSubGroup();
-//testworkflow();
-//removeFilesInGroup();
-
-
-
-
-
-function  testRemoveFile() {
-    var modelGroupKey = myProj.findPBXGroupKey({ path: 'Models'});
-    if (undefined != modelGroupKey) {
-        myProj.removeHeaderFile('HTTestModel.h', {}, modelGroupKey);
-        myProj.removeSourceFile('HTTestModel.m', {}, modelGroupKey);
-    }
-
-    // Step 5: Write back to project.
-    //fs.writeFileSync(projectPath, myProj.writeSync());
-    console.log('Project ' + projectPath + " is updated successfully !");
-}
-
-//testRemoveFile();
-
-
-
-
-
-
-
-//
-//exports.findGroupKey = {
-//    'should return a valid group key':function(test) {
-//        var keyByName = project.findPBXGroupKey({ name: 'Classes'});
-//        var keyByPath = project.findPBXGroupKey({ path: 'icons'});
-//        var keyByPathName = project.findPBXGroupKey({ path: '"HelloCordova/Plugins"', name: 'Plugins'});
-//        var nonExistingKey = project.findPBXGroupKey({ name: 'Foo'});
-//
-//        test.ok(keyByName === '080E96DDFE201D6D7F000001');
-//        test.ok(keyByPath === '308D052D1370CCF300D202BF');
-//        test.ok(keyByPathName === '307C750510C5A3420062BCA9');
-//        test.ok(nonExistingKey === undefined);
-//
-//        test.done();
-//    }
-//}
 
 // parsing is async, in a different process
 //myProj.parse(function (err) {
