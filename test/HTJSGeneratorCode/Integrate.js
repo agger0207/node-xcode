@@ -128,26 +128,36 @@ function removeFromPbxFileReferenceSectionWithKey (fileRef) {
     }
 }
 
+// TODO: 这里必须返回BuildFileUUID. 否则的话,无法从BuildPhase中删除.
 function removeFromPbxBuildFileSectionWithKey (fileRef) {
     var uuid;
-
+    var buildFileUUID;
     for (uuid in myProj.pbxBuildFileSection()) {
-        if (uuid == fileRef) {
-            delete myProj.pbxBuildFileSection()[uuid];
+        var buildFile = myProj.pbxBuildFileSection()[uuid];
+        if (buildFile.fileRef == fileRef) {
+            delete buildFile;
+            buildFileUUID = uuid;
+            break;
         }
     }
     var commentKey = f("%s_comment", fileRef);
+    var commentKey = f("%s_comment", fileRef);
     if (myProj.pbxBuildFileSection()[commentKey] != undefined) {
         delete myProj.pbxBuildFileSection()[commentKey];
-        delete myProj.pbxBuildFileSection()[commentKey];
     }
+
+    return uuid;
 }
 
 // Note: 这里只取了firstTarget, 理论上所有的Target都需要获取. 这里所有的参数都是fileRef的uuid.
+// Note: File Reference里面的uuid和BuildPhase中的uuid不相同. 所以这个方法不正确.
 function removeFromPbxSourcesBuildPhaseWithKey (fileRef) {
-    var sources = myProj.pbxSourcesBuildPhaseObj(myProj.getFirstTarget()), i;
+    // var target = myProj.getFirstTarget();
+    // TODO: 用FirstTarget会抛出异常,原因未知.
+    var target = undefined;
+    var sources = myProj.pbxSourcesBuildPhaseObj(target), i;
     for (i in sources.files) {
-        if (i == fileRef) {
+        if (sources.files[i].value == fileRef) {
             sources.files.splice(i, 1);
             break;
         }
@@ -166,17 +176,29 @@ function removeFilesInGroup() {
                 removeFromPbxFileReferenceSectionWithKey(uuid);    // PBXFileReference
             }
 
-            // 从当前Group中删除
-            groupChildren.splice(i, 1);
+            // 从当前Group中删除. TODO: 这里删除了后不可以继续遍历了.
+            //groupChildren.splice(i, 1);
             // TODO: 如果是子Group, 还要继续删除. 暂时不考虑文件夹.
             //myProj.removeFromPbxGroup(file, group);            // PBXGroup
 
             // 从Build File Ref中删除
-            removeFromPbxBuildFileSectionWithKey(uuid);
+            var buildFileUUID = removeFromPbxBuildFileSectionWithKey(uuid);
 
             // 从Build Phase中删除
-            removeFromPbxSourcesBuildPhaseWithKey(uuid);
+            if (undefined != buildFileUUID) {
+                removeFromPbxSourcesBuildPhaseWithKey(buildFileUUID);
+            }
+
+            console.log("finish one file");
         }
+
+        // 删除groupChildren.
+        groupChildren.splice(0, groupChildren.length);
+
+        //var length = groupChildren.length;
+        //groupChildren = group.children;
+        //length = groupChildren.length;
+        //console.log(length);
     }
 }
 //
@@ -210,6 +232,30 @@ function removeFilesInGroup() {
 //testRemoveSubGroup();
 //testworkflow();
 removeFilesInGroup();
+
+
+
+
+
+function  testRemoveFile() {
+    var modelGroupKey = myProj.findPBXGroupKey({ path: 'Models'});
+    if (undefined != modelGroupKey) {
+        myProj.removeHeaderFile('HTTestModel.h', {}, modelGroupKey);
+        myProj.removeSourceFile('HTTestModel.m', {}, modelGroupKey);
+    }
+
+    // Step 5: Write back to project.
+    //fs.writeFileSync(projectPath, myProj.writeSync());
+    console.log('Project ' + projectPath + " is updated successfully !");
+}
+
+//testRemoveFile();
+
+
+
+
+
+
 
 //
 //exports.findGroupKey = {
