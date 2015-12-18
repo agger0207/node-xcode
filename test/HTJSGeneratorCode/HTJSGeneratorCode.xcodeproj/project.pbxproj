@@ -15,6 +15,8 @@
 		E6AFD0211C1E99040027F340 /* HTJSGeneratorCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD0201C1E99040027F340 /* HTJSGeneratorCodeTests.m */; };
 		E6AFD02C1C1E99040027F340 /* HTJSGeneratorCodeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */; };
 		0814236A90D949D1A2F9431E /* HTTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB0CDBFC5304BDFA2C7F036 /* HTTestModel.m */; };
+		9380DBB4129A4016A5BE790C /* HTTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6414BF7BE8F84E50AB42AB8A /* HTTestModel.m */; };
+		928D39821EC646D798A3E5B6 /* HTTestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C416DCED984BED9D308117 /* HTTestRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,8 +53,10 @@
 		E6AFD0271C1E99040027F340 /* HTJSGeneratorCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTJSGeneratorCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTJSGeneratorCodeUITests.m; sourceTree = "<group>"; };
 		E6AFD02D1C1E99040027F340 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2E11668129ED41A4B83A542A /* HTTestModel.h */ = {isa = PBXFileReference; name = "HTTestModel.h"; path = "HTTestModel.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		EAB0CDBFC5304BDFA2C7F036 /* HTTestModel.m */ = {isa = PBXFileReference; name = "HTTestModel.m"; path = "HTTestModel.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		C42FA16D43EE40A984D61CA5 /* HTTestModel.h */ = {isa = PBXFileReference; name = "HTTestModel.h"; path = "HTTestModel.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		6414BF7BE8F84E50AB42AB8A /* HTTestModel.m */ = {isa = PBXFileReference; name = "HTTestModel.m"; path = "HTTestModel.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		0CB2E75FADAD425CBE1ABD00 /* HTTestRequest.h */ = {isa = PBXFileReference; name = "HTTestRequest.h"; path = "HTTestRequest.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		F8C416DCED984BED9D308117 /* HTTestRequest.m */ = {isa = PBXFileReference; name = "HTTestRequest.m"; path = "HTTestRequest.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +87,8 @@
 		BA604265FA2841C1B310F4EB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2E11668129ED41A4B83A542A /* HTTestModel.h */,
-				EAB0CDBFC5304BDFA2C7F036 /* HTTestModel.m */,
+				C42FA16D43EE40A984D61CA5 /* HTTestModel.h */,
+				6414BF7BE8F84E50AB42AB8A /* HTTestModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -122,6 +126,7 @@
 				E6AFD0171C1E99040027F340 /* Info.plist */,
 				E6AFD0061C1E99040027F340 /* Supporting Files */,
 				BA604265FA2841C1B310F4EB /* Models */,
+				ED6D750F3C0B43478EDB8BE5 /* Requests */,
 			);
 			path = HTJSGeneratorCode;
 			sourceTree = "<group>";
@@ -150,6 +155,16 @@
 				E6AFD02D1C1E99040027F340 /* Info.plist */,
 			);
 			path = HTJSGeneratorCodeUITests;
+			sourceTree = "<group>";
+		};
+		ED6D750F3C0B43478EDB8BE5 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				0CB2E75FADAD425CBE1ABD00 /* HTTestRequest.h */,
+				F8C416DCED984BED9D308117 /* HTTestRequest.m */,
+			);
+			name = Requests;
+			path = Requests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,7 +303,8 @@
 				E6AFD00E1C1E99040027F340 /* ViewController.m in Sources */,
 				E6AFD00B1C1E99040027F340 /* AppDelegate.m in Sources */,
 				E6AFD0081C1E99040027F340 /* main.m in Sources */,
-				0814236A90D949D1A2F9431E /* HTTestModel.m in Sources */,
+				9380DBB4129A4016A5BE790C /* HTTestModel.m in Sources */,
+				928D39821EC646D798A3E5B6 /* HTTestRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

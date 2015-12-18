@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "HTTestModel.h"
+#import "HTTestRequest.h"
 
 @interface ViewController ()
 
@@ -17,6 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    HTTestModel *model = [[HTTestModel alloc] init];
+    NSLog(@"%@", model);
 }
 
 - (void)didReceiveMemoryWarning {

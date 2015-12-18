@@ -27,7 +27,7 @@ function updateCode () {
 
     // 固定添加Models和Requests, 不需要参数配置
     var autoGroupNames = ["Models", "Requests"];
-    autoGroupNames.ForEach(function (groupName){
+    autoGroupNames.forEach(function (groupName){
         // 获取parent Group Key 和 要处理的Group Key
         var absoluteGroupPath = groupParentPath + "/" + groupName;
         var parentGroupKey = findGroupByAbsolutePath(groupParentPath);
@@ -55,7 +55,7 @@ function updateCode () {
         });
 
         // 将源文件添加到group中
-        sourceFiles.ForEach(function(sourceFile) {
+        sourceFiles.forEach(function(sourceFile) {
             myProj.addSourceFile(sourceFile, {}, groupKey);
         });
     });
