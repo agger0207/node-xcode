@@ -14,9 +14,8 @@
 		E6AFD0161C1E99040027F340 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6AFD0141C1E99040027F340 /* LaunchScreen.storyboard */; };
 		E6AFD0211C1E99040027F340 /* HTJSGeneratorCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD0201C1E99040027F340 /* HTJSGeneratorCodeTests.m */; };
 		E6AFD02C1C1E99040027F340 /* HTJSGeneratorCodeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */; };
-		0814236A90D949D1A2F9431E /* HTTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB0CDBFC5304BDFA2C7F036 /* HTTestModel.m */; };
-		9380DBB4129A4016A5BE790C /* HTTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6414BF7BE8F84E50AB42AB8A /* HTTestModel.m */; };
-		928D39821EC646D798A3E5B6 /* HTTestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C416DCED984BED9D308117 /* HTTestRequest.m */; };
+		90155AE588FD44C5BE9F3011 /* HTTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C6CBA43383AD4A0B9D9B0C96 /* HTTestModel.m */; };
+		BBCE68BC3DBE4EF38BC54407 /* HTTestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 749693318F8143D3909212FF /* HTTestRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,10 +52,10 @@
 		E6AFD0271C1E99040027F340 /* HTJSGeneratorCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTJSGeneratorCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTJSGeneratorCodeUITests.m; sourceTree = "<group>"; };
 		E6AFD02D1C1E99040027F340 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C42FA16D43EE40A984D61CA5 /* HTTestModel.h */ = {isa = PBXFileReference; name = "HTTestModel.h"; path = "HTTestModel.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		6414BF7BE8F84E50AB42AB8A /* HTTestModel.m */ = {isa = PBXFileReference; name = "HTTestModel.m"; path = "HTTestModel.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		0CB2E75FADAD425CBE1ABD00 /* HTTestRequest.h */ = {isa = PBXFileReference; name = "HTTestRequest.h"; path = "HTTestRequest.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		F8C416DCED984BED9D308117 /* HTTestRequest.m */ = {isa = PBXFileReference; name = "HTTestRequest.m"; path = "HTTestRequest.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		1ED6EDDC017347DCAFE57E7F /* HTTestModel.h */ = {isa = PBXFileReference; name = "HTTestModel.h"; path = "HTTestModel.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		C6CBA43383AD4A0B9D9B0C96 /* HTTestModel.m */ = {isa = PBXFileReference; name = "HTTestModel.m"; path = "HTTestModel.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		6894A91516E448ECB2614783 /* HTTestRequest.h */ = {isa = PBXFileReference; name = "HTTestRequest.h"; path = "HTTestRequest.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		749693318F8143D3909212FF /* HTTestRequest.m */ = {isa = PBXFileReference; name = "HTTestRequest.m"; path = "HTTestRequest.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +86,8 @@
 		BA604265FA2841C1B310F4EB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C42FA16D43EE40A984D61CA5 /* HTTestModel.h */,
-				6414BF7BE8F84E50AB42AB8A /* HTTestModel.m */,
+				1ED6EDDC017347DCAFE57E7F /* HTTestModel.h */,
+				C6CBA43383AD4A0B9D9B0C96 /* HTTestModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -160,8 +159,8 @@
 		ED6D750F3C0B43478EDB8BE5 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				0CB2E75FADAD425CBE1ABD00 /* HTTestRequest.h */,
-				F8C416DCED984BED9D308117 /* HTTestRequest.m */,
+				6894A91516E448ECB2614783 /* HTTestRequest.h */,
+				749693318F8143D3909212FF /* HTTestRequest.m */,
 			);
 			name = Requests;
 			path = Requests;
@@ -303,8 +302,8 @@
 				E6AFD00E1C1E99040027F340 /* ViewController.m in Sources */,
 				E6AFD00B1C1E99040027F340 /* AppDelegate.m in Sources */,
 				E6AFD0081C1E99040027F340 /* main.m in Sources */,
-				9380DBB4129A4016A5BE790C /* HTTestModel.m in Sources */,
-				928D39821EC646D798A3E5B6 /* HTTestRequest.m in Sources */,
+				90155AE588FD44C5BE9F3011 /* HTTestModel.m in Sources */,
+				BBCE68BC3DBE4EF38BC54407 /* HTTestRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -112,18 +112,20 @@ function removeFromPbxBuildFileSectionWithKey (fileRef) {
     for (uuid in myProj.pbxBuildFileSection()) {
         var buildFile = myProj.pbxBuildFileSection()[uuid];
         if (buildFile.fileRef == fileRef) {
-            delete buildFile;
+            // TODO: delete buildFile没有从这个字典中真正删除这个文件.
+            //delete buildFile;
+            delete myProj.pbxBuildFileSection()[uuid];
             buildFileUUID = uuid;
             break;
         }
     }
-    var commentKey = f("%s_comment", fileRef);
+
     var commentKey = f("%s_comment", fileRef);
     if (myProj.pbxBuildFileSection()[commentKey] != undefined) {
         delete myProj.pbxBuildFileSection()[commentKey];
     }
 
-    return uuid;
+    return buildFileUUID;
 }
 
 // Note: 这里只取了firstTarget, 理论上所有的Target都需要获取. 这里所有的参数都是fileRef的uuid.
