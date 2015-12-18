@@ -22,18 +22,25 @@ updateCode();
 
 function updateCode () {
     if (undefined == projectName || undefined == groupParentPath || undefined == folderParentPath || undefined == myProj) {
+        console.log("Please correct parameters, the command is like \r\n node UpdateModels.js projectName groupParentPath folderParentPath, please specify your own projectName, parent group path and pareng folder path");
         return;
     }
+
+    // TODO: 现在暂时不支持更换路径,即之前要删除的路径和后面要添加的路径不相同的Case.
+    console.log("Begin to update project " + projectName + ", Models and Requests will be added under group " + groupParentPath);
 
     // 固定添加Models和Requests, 不需要参数配置
     var autoGroupNames = ["Models", "Requests"];
     autoGroupNames.forEach(function (groupName){
+        console.log("Begin to check folder " + groupName);
+
         // 获取parent Group Key 和 要处理的Group Key
         var absoluteGroupPath = groupParentPath + "/" + groupName;
         var parentGroupKey = findGroupByAbsolutePath(groupParentPath);
         var groupKey = findGroupByAbsolutePath(absoluteGroupPath);
         if (undefined == groupKey) {
             // group不存在, 新建Group. GroupName与Path相同.
+            console.log("Group " + groupName + " does not exist, create group " + groupName + " under group " + groupParentPath);
             groupKey = myProj.pbxCreateGroup(groupName, groupName);
 
             // Add new created groups into parent group.
@@ -41,6 +48,7 @@ function updateCode () {
             myProj.addToPbxGroup(groupKey, parentGroupKey, {});
         } else {
             // group存在, 删除其中的所有文件.
+            console.log("Group " + groupName + " already exists, remove all files in this group first.");
             removeFilesInGroup(groupName);
         }
 
@@ -58,6 +66,8 @@ function updateCode () {
         sourceFiles.forEach(function(sourceFile) {
             myProj.addSourceFile(sourceFile, {}, groupKey);
         });
+
+        console.log("Add Source Files and Header Files from Path " + folderPath + " to group " + absoluteGroupPath + " successfully");
     });
 
 
@@ -82,8 +92,8 @@ function findGroupByAbsolutePath(fullPath) {
         pathList.splice(0, 1);
     }
 
+    // TODO: 下面的代码只用校验是否能够取到正确的Group.
     if (undefined != groupKey) {
-        console.log("Find group by absolute path  " + fullPath);
         var group = myProj.getPBXGroupByKey(groupKey);
     }
 
@@ -167,8 +177,6 @@ function removeFilesInGroup(groupName) {
             if (undefined != buildFileUUID) {
                 removeFromPbxSourcesBuildPhaseWithKey(buildFileUUID);
             }
-
-            console.log("finish one file");
         }
 
         // 删除groupChildren.
