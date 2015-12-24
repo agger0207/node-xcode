@@ -5,7 +5,10 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
+		3836765A1EED45C7B5445BDE /* HTTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AD1BBCB12146769D187B83 /* HTTestModel.m */; };
+		8A23F2F04F2D4DEF8C9EC596 /* HTTestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B489FA6E09484BBEA6488391 /* HTTestRequest.m */; };
 		E6AFD0081C1E99040027F340 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD0071C1E99040027F340 /* main.m */; };
 		E6AFD00B1C1E99040027F340 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD00A1C1E99040027F340 /* AppDelegate.m */; };
 		E6AFD00E1C1E99040027F340 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD00D1C1E99040027F340 /* ViewController.m */; };
@@ -14,8 +17,7 @@
 		E6AFD0161C1E99040027F340 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6AFD0141C1E99040027F340 /* LaunchScreen.storyboard */; };
 		E6AFD0211C1E99040027F340 /* HTJSGeneratorCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD0201C1E99040027F340 /* HTJSGeneratorCodeTests.m */; };
 		E6AFD02C1C1E99040027F340 /* HTJSGeneratorCodeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */; };
-		3836765A1EED45C7B5445BDE /* HTTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AD1BBCB12146769D187B83 /* HTTestModel.m */; };
-		8A23F2F04F2D4DEF8C9EC596 /* HTTestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B489FA6E09484BBEA6488391 /* HTTestRequest.m */; };
+		E6B03C011C27F53800450E9E /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B03C001C27F53800450E9E /* TestViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E589CFF231B4E6B9C81A938 /* HTTestModel.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; path = HTTestModel.h; sourceTree = "<group>"; };
+		3BD09DCC13244DC0A68BFE0A /* HTTestRequest.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; path = HTTestRequest.h; sourceTree = "<group>"; };
+		B489FA6E09484BBEA6488391 /* HTTestRequest.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; path = HTTestRequest.m; sourceTree = "<group>"; };
 		E6AFD0031C1E99040027F340 /* HTJSGeneratorCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HTJSGeneratorCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AFD0071C1E99040027F340 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E6AFD0091C1E99040027F340 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -52,10 +57,9 @@
 		E6AFD0271C1E99040027F340 /* HTJSGeneratorCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTJSGeneratorCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTJSGeneratorCodeUITests.m; sourceTree = "<group>"; };
 		E6AFD02D1C1E99040027F340 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2E589CFF231B4E6B9C81A938 /* HTTestModel.h */ = {isa = PBXFileReference; name = "HTTestModel.h"; path = "HTTestModel.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		F4AD1BBCB12146769D187B83 /* HTTestModel.m */ = {isa = PBXFileReference; name = "HTTestModel.m"; path = "HTTestModel.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		3BD09DCC13244DC0A68BFE0A /* HTTestRequest.h */ = {isa = PBXFileReference; name = "HTTestRequest.h"; path = "HTTestRequest.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		B489FA6E09484BBEA6488391 /* HTTestRequest.m */ = {isa = PBXFileReference; name = "HTTestRequest.m"; path = "HTTestRequest.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		E6B03BFF1C27F53800450E9E /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestViewController.h; path = ../Controllers/Test/TestViewController.h; sourceTree = "<group>"; };
+		E6B03C001C27F53800450E9E /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestViewController.m; path = ../Controllers/Test/TestViewController.m; sourceTree = "<group>"; };
+		F4AD1BBCB12146769D187B83 /* HTTestModel.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; path = HTTestModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 		BA604265FA2841C1B310F4EB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E6B03BFF1C27F53800450E9E /* TestViewController.h */,
+				E6B03C001C27F53800450E9E /* TestViewController.m */,
 				2E589CFF231B4E6B9C81A938 /* HTTestModel.h */,
 				F4AD1BBCB12146769D187B83 /* HTTestModel.m */,
 			);
@@ -115,6 +121,7 @@
 		E6AFD0051C1E99040027F340 /* HTJSGeneratorCode */ = {
 			isa = PBXGroup;
 			children = (
+				E6B03C021C27F57600450E9E /* hehe */,
 				E6AFD0091C1E99040027F340 /* AppDelegate.h */,
 				E6AFD00A1C1E99040027F340 /* AppDelegate.m */,
 				E6AFD00C1C1E99040027F340 /* ViewController.h */,
@@ -156,13 +163,19 @@
 			path = HTJSGeneratorCodeUITests;
 			sourceTree = "<group>";
 		};
+		E6B03C021C27F57600450E9E /* hehe */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = hehe;
+			sourceTree = "<group>";
+		};
 		ED6D750F3C0B43478EDB8BE5 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
 				3BD09DCC13244DC0A68BFE0A /* HTTestRequest.h */,
 				B489FA6E09484BBEA6488391 /* HTTestRequest.m */,
 			);
-			name = Requests;
 			path = Requests;
 			sourceTree = "<group>";
 		};
@@ -299,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6B03C011C27F53800450E9E /* TestViewController.m in Sources */,
 				E6AFD00E1C1E99040027F340 /* ViewController.m in Sources */,
 				E6AFD00B1C1E99040027F340 /* AppDelegate.m in Sources */,
 				E6AFD0081C1E99040027F340 /* main.m in Sources */,
