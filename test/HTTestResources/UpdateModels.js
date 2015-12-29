@@ -1,8 +1,7 @@
-// 这个JS直接引用xcode, 所有额外添加的东西都加在这个JS文件中.
-var xcode = require('xcode'),
+// API is a bit wonky right now
+var project = require('../../lib/pbxProject.js'),
     fs = require('fs'),
     util = require('util'),
-    COMMENT_KEY = /_comment$/,
     f = util.format;
 
 // TODO：参数缺少时, 需要给予警告和提示. 参数的处理需要更灵活
@@ -14,7 +13,7 @@ var projectPath = projectName + '.xcodeproj/project.pbxproj';
 //var projectPath = 'HTJSGeneratorCode.xcodeproj/project.pbxproj';
 
 // Get Project.
-var myProj = xcode.project(projectPath);
+var myProj = project(projectPath);
 
 // Debug with parseSync as it is impossible to debug async parsing.
 // For release version, it is OK to use parse function.
@@ -89,7 +88,7 @@ function findGroupByAbsolutePath(fullPath) {
     pathList.splice(0, 1);
     while (pathList.length > 0 && undefined != groupKey) {
         root = pathList[0];
-        groupKey = findPBXGroupKeyInParentGroup({path: root}, groupKey);
+        groupKey = myProj.findPBXGroupKeyInParentGroup({path: root}, groupKey);
         pathList.splice(0, 1);
     }
 
@@ -222,230 +221,4 @@ function GetExtensionFileName(pathfilename)
     var fn = arrpfn[arrpfn.length - 1];
     var arrfn = fn.split(".");
     return arrfn[arrfn.length - 1];
-}
-
-
-
-
-
-
-
-
-
-
-
-// Projects Extension
-// 这些最好添加到pbxProject.js中, 仅供当前流程使用.
-function removePbxGroupByKey(groupKey) {
-    var section = myProj.hash.project.objects['PBXGroup'],
-        key, itemKey;
-
-    for (key in section) {
-        // only look for comments
-        if (!COMMENT_KEY.test(key)) continue;
-
-        if (key == groupKey) {
-            itemKey = key.split(COMMENT_KEY)[0];
-            delete section[itemKey];
-        }
-    }
-}
-
-function removeGroupFromPbxGroup(removeGroupKey, groupKey) {
-    var group = myProj.getPBXGroupByKey(groupKey);
-    var removeGroup = myProj.getPBXGroupByKey(removeGroupKey);
-    if (group) {
-        var groupChildren = group.children, i;
-        for(i in groupChildren) {
-            if(removeGroupKey == groupChildren[i].value && removeGroup != undefined) {
-                groupChildren.splice(i, 1);
-
-                clearGroup(removeGroup);
-                break;
-            }
-        }
-    }
-
-    delete removeGroup;
-}
-
-function clearGroup(group) {
-    var groupChildren = group.children, i;
-    for (i in groupChildren) {
-        file = groupChildren[i];
-        if (file.fileRef != undefined) {
-            myProj.removeFromPbxFileReferenceSection(file);    // PBXFileReference
-        }
-
-        // TODO: 如果是子Group, 还要继续删除.
-        myProj.removeFromPbxGroup(file, group);            // PBXGroup
-    }
-}
-
-function removeGroupByKey(key, parentGroupKey) {
-    var group = getPBXGroupByKey(key, parentGroupKey);
-    if (group) {
-        var groupChildren = group.children, i;
-        for (i in groupChildren) {
-            file = groupChildren[i];
-            if (file.fileRef != undefined) {
-                myProj.removeFromPbxFileReferenceSection(file);    // PBXFileReference
-            }
-
-            // TODO: 如果是子Group, 还要继续删除.
-            myProj.removeFromPbxGroup(file, group);            // PBXGroup
-        }
-    }
-}
-
-// Remove a group and all files in this group.
-function removeGroup(groupPath, parentGroupKey) {
-    var group = getPBXGroupByPath(groupPath, parentGroupKey);
-    if (group) {
-        var groupChildren = group.children, i;
-        for (i in groupChildren) {
-            file = groupChildren[i];
-            if (file.fileRef != undefined) {
-                myProj.removeFromPbxFileReferenceSection(file);    // PBXFileReference
-            }
-
-            // TODO: 如果是子Group, 还要继续删除.
-            myProj.removeFromPbxGroup(file, group);            // PBXGroup
-        }
-    }
-}
-
-
-function getPBXGroupByPath(path, parentGroupKey) {
-    var groups = (undefined == parentGroupKey) ? myProj.hash.project.objects['PBXGroup'] : myProj.getPBXGroupByKey(parentGroupKey);
-    for (var key in groups) {
-        var group = groups[key];
-        if (group.path === path) {
-            return group;
-        }
-    }
-
-    return undefined;
-};
-
-function getPBXGroupByKey(key, parentGroupKey) {
-    var groups = (undefined == parentGroupKey) ? myProj.hash.project.objects['PBXGroup'] : myProj.getPBXGroupByKey(parentGroupKey);
-    var group = groups[key];
-    return group;
-};
-
-function findPBXGroupInParent(criteria, parentCriteria) {
-    if (undefined == parentCriteria) {
-        return myProj.findPBXGroupKey(criteria);
-    }
-
-    var target;
-    var groupKey = myProj.findPBXGroupKey(parentCriteria);
-    var group = myProj.getPBXGroupByKey(groupKey);
-    var groupChildren = group.children, i;
-    for(i in groupChildren) {
-        var child = groupChildren[i];
-        var childGroup = myProj.getPBXGroupByKey(child.value);
-        if (undefined == childGroup) {
-            // 这不是一个对应的Group.
-            continue;
-        }
-
-        if (criteria && criteria.path && criteria.name) {
-            if (criteria.path === childGroup.path && criteria.name === childGroup.name) {
-                target = childGroup;
-                break
-            }
-        }
-        else if (criteria && criteria.path) {
-            if (criteria.path === childGroup.path) {
-                target = childGroup;
-                break
-            }
-        }
-        else if (criteria && criteria.name) {
-            if (criteria.name === childGroup.name) {
-                target = childGroup;
-                break
-            }
-        }
-    }
-
-    return target;
-}
-
-function  findPBXGroupKeyInParent(criteria, parentCriteria) {
-    if (undefined == parentCriteria) {
-        return myProj.findPBXGroupKey(criteria);
-    }
-
-    var target;
-    var groupKey = myProj.findPBXGroupKey(parentCriteria);
-    var group = myProj.getPBXGroupByKey(groupKey);
-    var groupChildren = group.children, i;
-    for(i in groupChildren) {
-        var child = groupChildren[i];
-        var childGroup = myProj.getPBXGroupByKey(child.value);
-        if (undefined == childGroup) {
-            // 这不是一个对应的Group.
-            continue;
-        }
-
-        if (criteria && criteria.path && criteria.name) {
-            if (criteria.path === childGroup.path && criteria.name === childGroup.name) {
-                target = child.value;
-                break
-            }
-        }
-        else if (criteria && criteria.path) {
-            if (criteria.path === childGroup.path) {
-                target = child.value;
-                break
-            }
-        }
-        else if (criteria && criteria.name) {
-            if (criteria.name === childGroup.name) {
-                target = child.value;
-                break
-            }
-        }
-    }
-
-    return target;
-}
-
-
-function findPBXGroupKeyInParentGroup(criteria, parentGroupKey) {
-    var target;
-    var group = getPBXGroupByKey(parentGroupKey);
-    var groupChildren = group.children, i;
-    for(i in groupChildren) {
-        var child = groupChildren[i];
-        var childGroup = myProj.getPBXGroupByKey(child.value);
-        if (undefined == childGroup) {
-            // 这不是一个对应的Group.
-            continue;
-        }
-
-        if (criteria && criteria.path && criteria.name) {
-            if (criteria.path === childGroup.path && criteria.name === childGroup.name) {
-                target = child.value;
-                break
-            }
-        }
-        else if (criteria && criteria.path) {
-            if (criteria.path === childGroup.path) {
-                target = child.value;
-                break
-            }
-        }
-        else if (criteria && criteria.name) {
-            if (criteria.name === childGroup.name) {
-                target = child.value;
-                break
-            }
-        }
-    }
-
-    return target;
 }
