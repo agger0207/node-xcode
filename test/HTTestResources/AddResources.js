@@ -471,8 +471,9 @@ function addResources () {
         console.log("Could not find group to add resource file");
     }
 
+    
     //addXcassets("Assets.xcassets", parentGroupKey);
-    addPlistFile("Info.plist", parentGroupKey, {});
+    //addPlistFile("Info.plist", parentGroupKey, {});
 
     // 将内容写回到工程文件中.
     fs.writeFileSync(projectPath, myProj.writeSync());

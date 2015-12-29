@@ -4,7 +4,6 @@
     <list default="true" id="60bb0d24-338b-4636-bea2-0581d2551aa1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/HTTestResources/HTJSGeneratorCode.xcodeproj/project.xcworkspace/xcuserdata/netease.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/test/HTTestResources/HTJSGeneratorCode.xcodeproj/project.xcworkspace/xcuserdata/netease.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/HTTestResources/AddResources.js" afterPath="$PROJECT_DIR$/test/HTTestResources/AddResources.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/HTTestResources/HTJSGeneratorCode.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/test/HTTestResources/HTJSGeneratorCode.xcodeproj/project.pbxproj" />
     </list>
     <ignored path="node-xcode.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,8 +37,8 @@
       <file leaf-file-name="AddResources.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/HTTestResources/AddResources.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.397482">
-              <caret line="496" column="0" selection-start-line="496" selection-start-column="0" selection-end-line="496" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.18165468">
+              <caret line="473" column="4" selection-start-line="473" selection-start-column="4" selection-end-line="473" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -619,12 +618,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/test/HTTestResources/AddResources.js</url>
-          <line>474</line>
+          <line>475</line>
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/test/HTTestResources/AddResources.js</url>
-          <line>493</line>
+          <line>494</line>
           <option name="timeStamp" value="128" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1044,8 +1043,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/HTTestResources/AddResources.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.397482">
-          <caret line="496" column="0" selection-start-line="496" selection-start-column="0" selection-end-line="496" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.18165468">
+          <caret line="473" column="4" selection-start-line="473" selection-start-column="4" selection-end-line="473" selection-end-column="4" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
