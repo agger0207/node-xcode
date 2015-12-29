@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		1633717AA6294BD4B13F3ED7 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C091F8560FBB4B8693F87C1F /* TestViewController.m */; };
 		70459B39CB83470FAEC65357 /* HTTestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B96CF0CB8B164CA7B961B7C8 /* HTTestRequest.m */; };
@@ -69,6 +68,7 @@
 		E6AFD0201C1E99040027F340 /* HTJSGeneratorCodeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTJSGeneratorCodeTests.m; sourceTree = "<group>"; };
 		E6AFD0271C1E99040027F340 /* HTJSGeneratorCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTJSGeneratorCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AFD02B1C1E99040027F340 /* HTJSGeneratorCodeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTJSGeneratorCodeUITests.m; sourceTree = "<group>"; };
+		7988091A02B246179926A120 /* Info.plist */ = {isa = PBXFileReference; name = "Info.plist"; path = "Info.plist"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.xml; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +152,7 @@
 				E6AFD0061C1E99040027F340 /* Supporting Files */,
 				BA604265FA2841C1B310F4EB /* Models */,
 				ED6D750F3C0B43478EDB8BE5 /* Requests */,
+				7988091A02B246179926A120 /* Info.plist */,
 			);
 			path = HTJSGeneratorCode;
 			sourceTree = "<group>";

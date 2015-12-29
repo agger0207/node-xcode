@@ -489,9 +489,11 @@ function addStoryboardFile(path, opt) {
     myProj.addResourceFile(path, opt);
 }
 
+// 测试通过.
 function addPlistFile(path, group, opt) {
     myProj.addFile(path, group, opt);
 }
+
 
 function addXcassets(path, group, opt) {
     myProj.addResourceFile(path, opt);
